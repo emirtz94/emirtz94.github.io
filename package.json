@@ -1,14 +1,15 @@
 {
-  "name": "emirtz94.github.io",
+  "name": "astro-github-pages",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.6"
+    "astro": "^4.16.0"
   }
 }

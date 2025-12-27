@@ -1,0 +1,82 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import { tagColors, getContrastColor } from '../../data/tagColors';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const projects = await getCollection('projects');
+  const sorted = projects.sort((a, b) => a.data.order - b.data.order);
+  return paginate(sorted, { pageSize: 10 });
+};
+
+const { page } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Page {page.currentPage}</title>
+    <style>
+      :root { --bg: #ffffff; --text: #1a1a1a; --border: #ddd; --card-bg: #ffffff; }
+      :root.dark { --bg: #1a1a1a; --text: #f0f0f0; --border: #444; --card-bg: #2a2a2a; }
+      body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
+      .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+      .header h1 { margin: 0; }
+      .theme-toggle { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 1rem; cursor: pointer; color: var(--text); font-size: 1rem; }
+      .project { border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: var(--card-bg); }
+      .project h2 { margin-top: 0; }
+      .project a { color: var(--text); }
+      .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+      .tag { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; }
+      .pagination { display: flex; gap: 1rem; margin-top: 2rem; justify-content: center; align-items: center; }
+      .pagination a { padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 4px; text-decoration: none; color: var(--text); }
+      .pagination a:hover { background: var(--text); color: var(--bg); }
+      .pagination a.disabled { opacity: 0.5; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Portfolio Projects</h1>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+
+    {page.data.map((project) => (
+      <article class="project">
+        <h2><a href={`/project/${project.slug}`}>{project.data.title}</a></h2>
+        <p>{project.data.description}</p>
+        <div class="tags">
+          {project.data.tags.map((tag) => {
+            const bgColor = tagColors[tag] || '#e0e0e0';
+            const textColor = getContrastColor(bgColor);
+            return <span class="tag" style={`background: ${bgColor}; color: ${textColor};`}>{tag}</span>;
+          })}
+        </div>
+        <a href={`/project/${project.slug}`}>View Details →</a>
+      </article>
+    ))}
+
+    <nav class="pagination">
+      <a href={page.url.prev || '#'} class={!page.url.prev ? 'disabled' : ''}>← Previous</a>
+      <span>Page {page.currentPage} of {page.lastPage}</span>
+      <a href={page.url.next || '#'} class={!page.url.next ? 'disabled' : ''}>Next →</a>
+    </nav>
+
+    <script>
+      const toggle = document.getElementById('themeToggle');
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        root.classList.add('dark');
+        toggle.textContent = '☀️ Light';
+      }
+      toggle.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        const isDark = root.classList.contains('dark');
+        toggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    </script>
+  </body>
+</html>

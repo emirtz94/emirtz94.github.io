@@ -1,8 +1,8 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://emirtz94.github.io',
-    base: '/'
+  // Uncomment and set your GitHub username when deploying:
+  // site: 'https://<USERNAME>.github.io',
+  // base: '/<REPO>/',
 });
