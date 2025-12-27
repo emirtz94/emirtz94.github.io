@@ -6,10 +6,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emir Tucic – Software Developer</title>
+    <style>
+      :root { --bg: #ffffff; --text: #1a1a1a; --border: #ddd; --card-bg: #ffffff; }
+      :root.dark { --bg: #1a1a1a; --text: #f0f0f0; --border: #444; --card-bg: #2a2a2a; }
+
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: var(--bg);
+        color: var(--text);
+        transition: background 0.3s, color 0.3s;
+      }
+
+      .header {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .header h1 {
+        margin: 0;
+      }
+
+      .theme-toggle {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: var(--text);
+        font-size: 1rem;
+      }
+      .main { min-height: calc(100vh - 40px - 4rem); display: flex; align-items: center; justify-content: center; }
+      .main a { color: var(--text); }
+    </style>
+
   </head>
 
   <body>
-    <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="header">
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+
+    <main class="main">
       <section style="text-align: center;">
         <h1>Hi, I'm Emir 👋</h1>
         <p>Software Developer • Web • Full-Stack</p>
@@ -25,5 +65,22 @@
         </div>
       </section>
     </main>
+    <script>
+      const toggle = document.getElementById('themeToggle');
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+
+      if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        root.classList.add('dark');
+        toggle.textContent = '☀️ Light';
+      }
+
+      toggle.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        const isDark = root.classList.contains('dark');
+        toggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    </script>
   </body>
 </html>

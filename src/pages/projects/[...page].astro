@@ -42,6 +42,10 @@ const { page } = Astro.props;
       <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
     </div>
 
+    <div class="header">
+        <a href="/" >← Back to Home</a>
+    </div>
+
     {page.data.map((project) => (
       <article class="project">
         <h2><a href={`/project/${project.slug}`}>{project.data.title}</a></h2>
