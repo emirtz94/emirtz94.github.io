@@ -17,6 +17,8 @@ const { page } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Emir Tucic – Software Developer - My personal portfolio built with Astro">
+    <meta name="robots" content="index, follow">
     <title>Portfolio - Page {page.currentPage}</title>
     <style>
       :root { --bg: #ffffff; --text: #1a1a1a; --border: #ddd; --card-bg: #ffffff; }
@@ -35,6 +37,15 @@ const { page } = Astro.props;
       .pagination a:hover { background: var(--text); color: var(--bg); }
       .pagination a.disabled { opacity: 0.5; pointer-events: none; }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZCXT0KGHL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CZCXT0KGHL');
+    </script>
   </head>
   <body>
     <div class="header">

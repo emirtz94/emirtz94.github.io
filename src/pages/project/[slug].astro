@@ -20,6 +20,8 @@ const { Content } = await project.render();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Emir Tucic – Software Developer - My personal portfolio built with Astro">
+    <meta name="robots" content="index, follow">
     <title>{project.data.title}</title>
     <style>
       :root { --bg: #ffffff; --text: #1a1a1a; --border: #ddd; --card-bg: #ffffff; }
@@ -38,6 +40,15 @@ const { Content } = await project.render();
       :root.dark .github-link { background: #444d56; }
       :root.dark .github-link:hover { background: #586069; }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZCXT0KGHL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CZCXT0KGHL');
+    </script>
   </head>
   <body>
     <div class="header">
