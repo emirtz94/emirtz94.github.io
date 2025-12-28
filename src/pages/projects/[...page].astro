@@ -17,15 +17,33 @@ const { page } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Emir Tucic – Software Developer - My personal portfolio built with Astro">
+    <meta
+      name="description"
+      content={`Browse ${page.total} projects by Emir Tučić, including full-stack, frontend, and backend development work.`}
+    />
     <meta name="robots" content="index, follow">
-    <title>Portfolio - Page {page.currentPage}</title>
+    <meta property="og:title" content="Projects – Emir Tučić" />
+    <meta property="og:description" content="Explore full-stack and frontend projects by Emir Tučić." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://emirtz94.github.io/projects" />
+    <meta property="og:image" content="https://emirtz94.github.io/og-image.png" />
+    <link
+      rel="canonical"
+      href={`https://emirtz94.github.io/projects${page.currentPage > 1 ? `/page/${page.currentPage}` : ''}`}
+    />
+    <title>
+      {page.currentPage === 1
+        ? 'Projects – Emir Tučić | Full-Stack Developer'
+        : `Projects – Page ${page.currentPage} | Emir Tučić`}
+    </title>
     <style>
       :root { --bg: #ffffff; --text: #1a1a1a; --border: #ddd; --card-bg: #ffffff; }
       :root.dark { --bg: #1a1a1a; --text: #f0f0f0; --border: #444; --card-bg: #2a2a2a; }
       body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
       .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
       .header h1 { margin: 0; }
+      .back-link { color: var(--text); text-decoration: none; }
+      .back-link:hover { text-decoration: underline; }
       .theme-toggle { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 1rem; cursor: pointer; color: var(--text); font-size: 1rem; }
       .project { border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: var(--card-bg); }
       .project h2 { margin-top: 0; }
@@ -46,6 +64,19 @@ const { page } = Astro.props;
 
       gtag('config', 'G-CZCXT0KGHL');
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Projects by Emir Tučić",
+      "url": "https://emirtz94.github.io/projects",
+      "about": {
+        "@type": "Person",
+        "name": "Emir Tučić",
+        "jobTitle": "Full-Stack Developer"
+      }
+    }
+    </script>
   </head>
   <body>
     <div class="header">
@@ -54,7 +85,7 @@ const { page } = Astro.props;
     </div>
 
     <div class="header">
-        <a href="/" >← Back to Home</a>
+        <a href="/" class="back-link" >← Back to Home</a>
     </div>
 
     {page.data.map((project) => (
@@ -73,9 +104,9 @@ const { page } = Astro.props;
     ))}
 
     <nav class="pagination">
-      <a href={page.url.prev || '#'} class={!page.url.prev ? 'disabled' : ''}>← Previous</a>
+      <a href={page.url.prev || '#'} class={!page.url.prev ? 'disabled' : ''} aria-label="Previous page">← Previous</a>
       <span>Page {page.currentPage} of {page.lastPage}</span>
-      <a href={page.url.next || '#'} class={!page.url.next ? 'disabled' : ''}>Next →</a>
+      <a href={page.url.next || '#'} class={!page.url.next ? 'disabled' : ''} aria-label="Next page">Next →</a>
     </nav>
 
     <script>

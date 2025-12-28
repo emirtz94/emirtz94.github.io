@@ -7,7 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Emir Tucic – Software Developer - My personal portfolio built with Astro">
     <meta name="robots" content="index, follow">
-    <title>Portfolio – Emir Tučić</title>
+    <meta property="og:title" content="Emir Tučić – Software Developer" />
+    <meta property="og:description" content="Full-stack developer portfolio showcasing projects, skills, and experience." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://emirtz94.github.io/" />
+    <meta property="og:image" content="https://emirtz94.github.io/og-image.png" />
+    <title>Emir Tučić – Full-Stack Software Developer Portfolio</title>
+    <link rel="canonical" href="https://emirtz94.github.io/" />
     <style>
       :root { --bg: #ffffff; --text: #1a1a1a; --border: #ddd; --card-bg: #ffffff; }
       :root.dark { --bg: #1a1a1a; --text: #f0f0f0; --border: #444; --card-bg: #2a2a2a; }
@@ -52,6 +58,18 @@
 
       gtag('config', 'G-CZCXT0KGHL');
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Emir Tučić",
+        "url": "https://emirtz94.github.io",
+        "jobTitle": "Software Developer",
+        "sameAs": [
+          "https://github.com/emirtz94"
+        ]
+      }
+    </script>
   </head>
 
   <body>
@@ -61,18 +79,13 @@
 
     <main class="main">
       <section style="text-align: center;">
-        <h1>Hi, I'm Emir 👋</h1>
-        <p>Software Developer • Web • Full-Stack</p>
+        <h1>Hi, I'm Emir Tučić 👋</h1>
+        <p>Full-Stack Software Developer building modern, scalable web applications.</p>
 
-        <div style="margin-top: 2rem;">
-          <a href="/projects" style="margin-right: 1rem;">
-            🚀 View Projects
-          </a>
-
-          <a href="/cv">
-            📄 View CV
-          </a>
-        </div>
+        <nav aria-label="Main navigation" style="margin-top: 2rem;">
+          <a href="/projects" style="margin-right: 1rem;">🚀 View Projects</a>
+          <a href="/cv">📄 View CV</a>
+        </nav>
       </section>
     </main>
     <script>
