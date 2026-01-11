@@ -25,7 +25,10 @@ const { page } = Astro.props;
     <meta property="og:title" content="Projects – Emir Tučić" />
     <meta property="og:description" content="Explore full-stack and frontend projects by Emir Tučić." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://emirtz94.github.io/projects" />
+    <meta
+      property="og:url"
+      content={`https://emirtz94.github.io/projects${page.currentPage > 1 ? `/page/${page.currentPage}` : ''}`}
+    />
     <meta property="og:image" content="https://emirtz94.github.io/og-image.png" />
     <link
       rel="canonical"
@@ -68,13 +71,20 @@ const { page } = Astro.props;
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
+      "@id": "https://emirtz94.github.io/projects#collection",
       "name": "Projects by Emir Tučić",
       "url": "https://emirtz94.github.io/projects",
       "about": {
         "@type": "Person",
+        "@id": "https://emirtz94.github.io/#person",
         "name": "Emir Tučić",
         "alternateName": "Emir Tucic",
         "jobTitle": "Senior Software Developer"
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListOrder": "https://schema.org/ItemListOrderAscending",
+        "numberOfItems": 10
       }
     }
     </script>
