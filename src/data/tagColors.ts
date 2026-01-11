@@ -6,6 +6,7 @@ export const tagColors: Record<string, string> = {
   "Node.js": "#339933",
   Express: "#000000",
   Handlebars: "#f7931e", // Handlebars orange
+  MySQL: "#00758F"
 };
 
 export function getContrastColor(hex: string): string {
