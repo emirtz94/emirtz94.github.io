@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
-  // Uncomment and set your GitHub username when deploying:
-  // site: 'https://<USERNAME>.github.io',
-  // base: '/<REPO>/',
+  site: 'https://emirtz94.github.io/',
+  integrations: [sitemap()],
 });
